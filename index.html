@@ -9,7 +9,7 @@
   <style>
     :root{
       --bg:#f4f7f6;
-      --card:#ffffff;
+      --card:#fff;
       --primary:#1abc9c;
       --primary-dark:#16a085;
       --sidebar:#2c3e50;
@@ -19,8 +19,8 @@
       --line:#e5e7eb;
       --shadow:0 10px 30px rgba(0,0,0,.08);
       --radius:18px;
-      --sidebar-width:260px;
-      --sidebar-collapsed:72px;
+      --sidebar-w:260px;
+      --sidebar-c:76px;
     }
 
     *{margin:0;padding:0;box-sizing:border-box}
@@ -35,27 +35,39 @@
       overflow-x:hidden;
     }
 
-    .layout{
-      display:flex;
-      min-height:100vh;
+    .layout{display:flex;min-height:100vh}
+
+    .mobile-toggle{
+      display:none;
+      position:fixed;
+      top:12px;
+      left:12px;
+      z-index:50;
+      width:46px;
+      height:46px;
+      border:none;
+      border-radius:14px;
+      background:var(--sidebar-dark);
+      color:#fff;
+      box-shadow:var(--shadow);
+      cursor:pointer;
     }
 
     /* Sidebar */
     .sidebar{
-      width:var(--sidebar-collapsed);
+      width:var(--sidebar-c);
       background:linear-gradient(180deg, var(--sidebar) 0%, #233140 100%);
       color:#ecf0f1;
       position:fixed;
       inset:0 auto 0 0;
-      z-index:30;
+      z-index:40;
       box-shadow:var(--shadow);
-      transition:width .3s ease, transform .3s ease;
       overflow:hidden;
+      transition:transform .3s ease, width .3s ease;
     }
 
-    .sidebar.open{
-      width:var(--sidebar-width);
-    }
+    .sidebar.open,
+    .sidebar:hover{width:var(--sidebar-w)}
 
     .brand{
       height:76px;
@@ -67,38 +79,13 @@
       border-bottom:1px solid rgba(255,255,255,.08);
       white-space:nowrap;
     }
-
-    .brand i{
-      color:var(--primary);
-      font-size:24px;
-      min-width:28px;
-      text-align:center;
-    }
-
-    .brand h2{
-      font-size:16px;
-      font-weight:700;
-      opacity:0;
-      transform:translateX(-6px);
-      transition:.25s ease;
-    }
-
+    .brand i{color:var(--primary);font-size:24px;min-width:28px;text-align:center}
+    .brand h2{font-size:16px;font-weight:700;opacity:0;transition:.25s ease}
     .sidebar.open .brand h2,
-    .sidebar:hover .brand h2{
-      opacity:1;
-      transform:none;
-    }
+    .sidebar:hover .brand h2{opacity:1}
 
-    .sidebar-menu{
-      list-style:none;
-      padding:12px 0;
-    }
-
-    .menu-item{
-      position:relative;
-      margin:6px 10px;
-    }
-
+    .sidebar-menu{list-style:none;padding:12px 0}
+    .menu-item{margin:6px 10px}
     .menu-toggle{
       width:100%;
       display:flex;
@@ -114,33 +101,11 @@
       font:inherit;
       text-align:left;
     }
-
-    .menu-toggle i{
-      width:28px;
-      min-width:28px;
-      text-align:center;
-      font-size:18px;
-    }
-
-    .menu-label{
-      opacity:0;
-      white-space:nowrap;
-      transition:.25s ease;
-      font-size:14px;
-      font-weight:500;
-    }
-
+    .menu-toggle i{width:28px;text-align:center;font-size:18px}
+    .menu-label{opacity:0;transition:.25s ease;white-space:nowrap;font-size:14px;font-weight:500}
     .sidebar.open .menu-label,
-    .sidebar:hover .menu-label{
-      opacity:1;
-    }
-
-    .menu-toggle:hover,
-    .menu-toggle.active{
-      background:rgba(255,255,255,.08);
-      color:#fff;
-    }
-
+    .sidebar:hover .menu-label{opacity:1}
+    .menu-toggle:hover,.menu-toggle.active{background:rgba(255,255,255,.08);color:#fff}
     .submenu{
       list-style:none;
       margin:0 0 0 18px;
@@ -150,11 +115,7 @@
       overflow:hidden;
       transition:max-height .35s ease;
     }
-
-    .menu-item.open .submenu{
-      max-height:900px;
-    }
-
+    .menu-item.open .submenu{max-height:900px}
     .submenu a{
       display:block;
       padding:10px 12px;
@@ -166,28 +127,19 @@
       transition:.2s ease;
       white-space:nowrap;
     }
-
-    .submenu a:hover{
-      background:rgba(26,188,156,.16);
-      color:#fff;
-    }
+    .submenu a:hover{background:rgba(26,188,156,.16);color:#fff}
 
     /* Main */
     .main{
-      margin-left:var(--sidebar-collapsed);
-      width:calc(100% - var(--sidebar-collapsed));
+      margin-left:var(--sidebar-c);
+      width:calc(100% - var(--sidebar-c));
       padding:20px;
-      transition:margin-left .3s ease, width .3s ease;
+      transition:margin-left .3s ease,width .3s ease;
     }
-
-    .sidebar.open ~ .main{
-      margin-left:var(--sidebar-width);
-      width:calc(100% - var(--sidebar-width));
-    }
-
+    .sidebar.open ~ .main,
     .sidebar:hover ~ .main{
-      margin-left:var(--sidebar-width);
-      width:calc(100% - var(--sidebar-width));
+      margin-left:var(--sidebar-w);
+      width:calc(100% - var(--sidebar-w));
     }
 
     .topbar{
@@ -199,30 +151,14 @@
       padding:18px 20px;
       margin-bottom:18px;
       display:flex;
-      align-items:center;
       justify-content:space-between;
+      align-items:center;
       gap:16px;
       flex-wrap:wrap;
     }
-
-    .topbar h1{
-      font-size:22px;
-      color:#1f2d3d;
-      margin-bottom:4px;
-    }
-
-    .topbar p{
-      color:var(--muted);
-      font-size:13px;
-    }
-
-    .top-actions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
-
+    .topbar h1{font-size:22px;color:#1f2d3d;margin-bottom:4px}
+    .topbar p{color:var(--muted);font-size:13px}
+    .top-actions{display:flex;gap:10px;flex-wrap:wrap}
     .pill{
       display:inline-flex;
       align-items:center;
@@ -236,7 +172,7 @@
       box-shadow:0 4px 14px rgba(0,0,0,.04);
     }
 
-    /* Top menu */
+    /* Top nav */
     .top-nav{
       background:#fff;
       border:1px solid var(--line);
@@ -248,16 +184,13 @@
       top:12px;
       z-index:20;
     }
-
     .top-nav ul{
       list-style:none;
       display:flex;
       justify-content:flex-end;
-      align-items:center;
       gap:10px;
       flex-wrap:wrap;
     }
-
     .top-nav a{
       display:block;
       text-decoration:none;
@@ -268,28 +201,11 @@
       transition:.25s ease;
       background:#f8fafc;
     }
+    .top-nav a:hover,.top-nav a.active{background:var(--primary);color:#fff}
 
-    .top-nav a:hover,
-    .top-nav a.active{
-      background:var(--primary);
-      color:#fff;
-      transform:translateY(-1px);
-    }
-
-    /* Sections */
-    .section{
-      display:none;
-      animation:fadeIn .35s ease;
-    }
-
-    .section.active{
-      display:block;
-    }
-
-    @keyframes fadeIn{
-      from{opacity:0;transform:translateY(10px)}
-      to{opacity:1;transform:translateY(0)}
-    }
+    .section{display:none;animation:fadeIn .35s ease}
+    .section.active{display:block}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
     .card{
       background:var(--card);
@@ -300,26 +216,10 @@
       margin-bottom:18px;
     }
 
-    .section-title{
-      font-size:20px;
-      margin-bottom:12px;
-      color:#213547;
-    }
+    .section-title{font-size:20px;margin-bottom:12px;color:#213547}
+    .section-desc{color:var(--muted);margin-bottom:16px;line-height:1.7;font-size:14px}
 
-    .section-desc{
-      color:var(--muted);
-      margin-bottom:16px;
-      line-height:1.7;
-      font-size:14px;
-    }
-
-    .tabs{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-bottom:16px;
-    }
-
+    .tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
     .tab-btn{
       border:none;
       background:#eef4f6;
@@ -331,61 +231,28 @@
       transition:.25s ease;
       min-height:42px;
     }
-
-    .tab-btn:hover,
-    .tab-btn.active{
-      background:var(--primary);
-      color:#fff;
-      transform:translateY(-1px);
-    }
+    .tab-btn.active,.tab-btn:hover{background:var(--primary);color:#fff}
 
     .tab-panel{display:none}
     .tab-panel.active{display:block}
 
-    table{
-      width:100%;
-      border-collapse:collapse;
-      background:#fff;
-      min-width:620px;
-    }
-
     .table-wrap{
       width:100%;
       overflow-x:auto;
+      border:1px solid #e9edf2;
       border-radius:14px;
-      border:1px solid #e9edf2;
+      background:#fff;
     }
-
-    th,td{
-      border:1px solid #e9edf2;
-      padding:12px 14px;
-      text-align:left;
-      vertical-align:top;
-      font-size:14px;
-    }
-
-    th{
-      background:#f8fbfc;
-      color:#2d3436;
-      font-weight:600;
-    }
-
-    .badge{
-      display:inline-block;
-      padding:6px 10px;
-      border-radius:999px;
-      background:#e8f8f5;
-      color:#0f766e;
-      font-size:12px;
-      font-weight:600;
-    }
+    table{width:100%;border-collapse:collapse;min-width:620px}
+    th,td{border:1px solid #e9edf2;padding:12px 14px;text-align:left;vertical-align:top;font-size:14px}
+    th{background:#f8fbfc;font-weight:600}
+    .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:#e8f8f5;color:#0f766e;font-size:12px;font-weight:600}
 
     .cards{
       display:grid;
-      grid-template-columns:repeat(3, minmax(0, 1fr));
+      grid-template-columns:repeat(3,minmax(0,1fr));
       gap:16px;
     }
-
     .fish-card{
       background:#fff;
       border:1px solid var(--line);
@@ -394,87 +261,32 @@
       box-shadow:0 8px 22px rgba(0,0,0,.06);
       transition:.25s ease;
     }
-
-    .fish-card:hover{
-      transform:translateY(-4px);
-      box-shadow:0 14px 30px rgba(0,0,0,.10);
-    }
-
-    .fish-card img{
-      width:100%;
-      height:180px;
-      object-fit:cover;
-      display:block;
-    }
-
-    .fish-card .body{
-      padding:16px;
-    }
-
-    .fish-card h4{
-      margin-bottom:8px;
-      font-size:16px;
-    }
-
-    .fish-card p{
-      font-size:13px;
-      line-height:1.6;
-      color:var(--muted);
-    }
+    .fish-card:hover{transform:translateY(-4px)}
+    .fish-card img{width:100%;height:180px;object-fit:cover;display:block}
+    .fish-card .body{padding:16px}
+    .fish-card h4{margin-bottom:8px;font-size:16px}
+    .fish-card p{font-size:13px;line-height:1.6;color:var(--muted)}
 
     .info-box{
       padding:18px;
       border-radius:16px;
       border:1px solid var(--line);
-      background:linear-gradient(180deg, #fff, #fbfdff);
+      background:linear-gradient(180deg,#fff,#fbfdff);
     }
-
-    .info-box h4{
-      margin-bottom:8px;
-      font-size:15px;
-    }
-
-    .info-box p{
-      color:var(--muted);
-      line-height:1.7;
-      font-size:14px;
-    }
-
-    /* Mobile button */
-    .mobile-bar{
-      display:none;
-      position:fixed;
-      top:12px;
-      left:12px;
-      z-index:40;
-      background:var(--sidebar-dark);
-      color:#fff;
-      border:none;
-      width:46px;
-      height:46px;
-      border-radius:14px;
-      box-shadow:var(--shadow);
-      cursor:pointer;
-    }
+    .info-box h4{margin-bottom:8px;font-size:15px}
+    .info-box p{color:var(--muted);line-height:1.7;font-size:14px}
 
     @media (max-width: 992px){
-      .cards{
-        grid-template-columns:repeat(2, minmax(0, 1fr));
-      }
+      .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
     }
 
     @media (max-width: 768px){
-      .mobile-bar{
-        display:flex;
-        align-items:center;
-        justify-content:center;
-      }
+      .mobile-toggle{display:flex;align-items:center;justify-content:center}
 
       .sidebar{
         transform:translateX(-100%);
-        width:var(--sidebar-width);
+        width:var(--sidebar-w);
       }
-
       .sidebar.open{
         transform:translateX(0);
       }
@@ -492,63 +304,24 @@
         align-items:flex-start;
       }
 
-      .top-actions{
-        justify-content:flex-start;
-      }
-
-      .top-nav{
-        position:static;
-      }
-
-      .top-nav ul{
-        justify-content:flex-start;
-      }
-
-      .cards{
-        grid-template-columns:1fr;
-      }
-
-      .tab-btn,
-      .top-nav a{
-        font-size:13px;
-      }
-
-      .card{
-        padding:16px;
-      }
-
-      .section-title{
-        font-size:18px;
-      }
+      .top-actions{justify-content:flex-start}
+      .top-nav{position:static}
+      .top-nav ul{justify-content:flex-start}
+      .cards{grid-template-columns:1fr}
+      .card{padding:16px}
+      .section-title{font-size:18px}
+      .top-nav a{width:100%;text-align:center}
     }
 
     @media (max-width: 480px){
-      .topbar h1{
-        font-size:18px;
-      }
-
-      .pill{
-        width:100%;
-        justify-content:center;
-      }
-
-      .tabs{
-        gap:8px;
-      }
-
-      .tab-btn{
-        width:100%;
-      }
-
-      .top-nav a{
-        width:100%;
-        text-align:center;
-      }
+      .topbar h1{font-size:18px}
+      .pill{width:100%;justify-content:center}
+      .tab-btn{width:100%}
     }
   </style>
 </head>
 <body>
-  <button class="mobile-bar" onclick="toggleSidebar()">
+  <button class="mobile-toggle" onclick="toggleSidebar()">
     <i class="fa-solid fa-bars"></i>
   </button>
 
@@ -613,18 +386,10 @@
             <button class="tab-btn" onclick="showTab(event,'kub3')">KUB 3</button>
             <button class="tab-btn" onclick="showTab(event,'kub4')">KUB 4</button>
           </div>
-          <div id="kub1" class="tab-panel active">
-            <div class="info-box"><h4>KUB Laut Maju Bersama</h4><p>Didirikan untuk memperkuat solidaritas nelayan dan meningkatkan pengelolaan hasil tangkapan secara kolektif.</p></div>
-          </div>
-          <div id="kub2" class="tab-panel">
-            <div class="info-box"><h4>KUB Mina Sejahtera</h4><p>Berawal dari inisiatif nelayan lokal untuk membangun sistem kerja sama yang lebih efisien dan berkelanjutan.</p></div>
-          </div>
-          <div id="kub3" class="tab-panel">
-            <div class="info-box"><h4>KUB Samudera Jaya</h4><p>Dibentuk untuk mendukung kegiatan penangkapan ikan yang terorganisir dan transparan dalam pengelolaan kelompok.</p></div>
-          </div>
-          <div id="kub4" class="tab-panel">
-            <div class="info-box"><h4>KUB Bahari Makmur</h4><p>Terbentuk dari semangat bersama untuk meningkatkan kesejahteraan nelayan melalui usaha perikanan yang terarah.</p></div>
-          </div>
+          <div id="kub1" class="tab-panel active"><div class="info-box"><h4>KUB Laut Maju Bersama</h4><p>Didirikan untuk memperkuat solidaritas nelayan dan meningkatkan pengelolaan hasil tangkapan secara kolektif.</p></div></div>
+          <div id="kub2" class="tab-panel"><div class="info-box"><h4>KUB Mina Sejahtera</h4><p>Berawal dari inisiatif nelayan lokal untuk membangun sistem kerja sama yang lebih efisien dan berkelanjutan.</p></div></div>
+          <div id="kub3" class="tab-panel"><div class="info-box"><h4>KUB Samudera Jaya</h4><p>Dibentuk untuk mendukung kegiatan penangkapan ikan yang terorganisir dan transparan dalam pengelolaan kelompok.</p></div></div>
+          <div id="kub4" class="tab-panel"><div class="info-box"><h4>KUB Bahari Makmur</h4><p>Terbentuk dari semangat bersama untuk meningkatkan kesejahteraan nelayan melalui usaha perikanan yang terarah.</p></div></div>
         </div>
       </section>
 
@@ -639,36 +404,16 @@
             <button class="tab-btn" onclick="showTab(event,'dasar4')">Data KUB 4</button>
           </div>
           <div id="dasar1" class="tab-panel active">
-            <div class="table-wrap">
-              <table>
-                <tr><th>Nama KUB</th><th>Tahun Berdiri</th><th>Status</th><th>Nama Pendiri/Ketua</th></tr>
-                <tr><td>KUB Laut Maju Bersama</td><td>2018</td><td><span class="badge">Aktif</span></td><td>Andi Saputra</td></tr>
-              </table>
-            </div>
+            <div class="table-wrap"><table><tr><th>Nama KUB</th><th>Tahun Berdiri</th><th>Status</th><th>Nama Pendiri/Ketua</th></tr><tr><td>KUB Laut Maju Bersama</td><td>2018</td><td><span class="badge">Aktif</span></td><td>Andi Saputra</td></tr></table></div>
           </div>
           <div id="dasar2" class="tab-panel">
-            <div class="table-wrap">
-              <table>
-                <tr><th>Nama KUB</th><th>Tahun Berdiri</th><th>Status</th><th>Nama Pendiri/Ketua</th></tr>
-                <tr><td>KUB Mina Sejahtera</td><td>2019</td><td><span class="badge">Aktif</span></td><td>Budi Santoso</td></tr>
-              </table>
-            </div>
+            <div class="table-wrap"><table><tr><th>Nama KUB</th><th>Tahun Berdiri</th><th>Status</th><th>Nama Pendiri/Ketua</th></tr><tr><td>KUB Mina Sejahtera</td><td>2019</td><td><span class="badge">Aktif</span></td><td>Budi Santoso</td></tr></table></div>
           </div>
           <div id="dasar3" class="tab-panel">
-            <div class="table-wrap">
-              <table>
-                <tr><th>Nama KUB</th><th>Tahun Berdiri</th><th>Status</th><th>Nama Pendiri/Ketua</th></tr>
-                <tr><td>KUB Samudera Jaya</td><td>2020</td><td><span class="badge">Aktif</span></td><td>Cahyo Pratama</td></tr>
-              </table>
-            </div>
+            <div class="table-wrap"><table><tr><th>Nama KUB</th><th>Tahun Berdiri</th><th>Status</th><th>Nama Pendiri/Ketua</th></tr><tr><td>KUB Samudera Jaya</td><td>2020</td><td><span class="badge">Aktif</span></td><td>Cahyo Pratama</td></tr></table></div>
           </div>
           <div id="dasar4" class="tab-panel">
-            <div class="table-wrap">
-              <table>
-                <tr><th>Nama KUB</th><th>Tahun Berdiri</th><th>Status</th><th>Nama Pendiri/Ketua</th></tr>
-                <tr><td>KUB Bahari Makmur</td><td>2021</td><td><span class="badge">Aktif</span></td><td>Dewi Lestari</td></tr>
-              </table>
-            </div>
+            <div class="table-wrap"><table><tr><th>Nama KUB</th><th>Tahun Berdiri</th><th>Status</th><th>Nama Pendiri/Ketua</th></tr><tr><td>KUB Bahari Makmur</td><td>2021</td><td><span class="badge">Aktif</span></td><td>Dewi Lestari</td></tr></table></div>
           </div>
         </div>
       </section>
@@ -683,46 +428,10 @@
             <button class="tab-btn" onclick="showTab(event,'anggota3')">Anggota KUB 3</button>
             <button class="tab-btn" onclick="showTab(event,'anggota4')">Anggota KUB 4</button>
           </div>
-          <div id="anggota1" class="tab-panel active">
-            <div class="table-wrap">
-              <table>
-                <tr><th>No</th><th>Nama Anggota</th><th>Jabatan</th><th>Ket</th></tr>
-                <tr><td>1</td><td>Andi Saputra</td><td>Ketua</td><td>Nelayan aktif</td></tr>
-                <tr><td>2</td><td>Rahmat Hidayat</td><td>Sekretaris</td><td>Administrasi</td></tr>
-                <tr><td>3</td><td>Siti Nurhaliza</td><td>Bendahara</td><td>Keuangan</td></tr>
-              </table>
-            </div>
-          </div>
-          <div id="anggota2" class="tab-panel">
-            <div class="table-wrap">
-              <table>
-                <tr><th>No</th><th>Nama Anggota</th><th>Jabatan</th><th>Ket</th></tr>
-                <tr><td>1</td><td>Budi Santoso</td><td>Ketua</td><td>Nelayan aktif</td></tr>
-                <tr><td>2</td><td>Muhammad Iqbal</td><td>Sekretaris</td><td>Administrasi</td></tr>
-                <tr><td>3</td><td>Rina Melati</td><td>Bendahara</td><td>Keuangan</td></tr>
-              </table>
-            </div>
-          </div>
-          <div id="anggota3" class="tab-panel">
-            <div class="table-wrap">
-              <table>
-                <tr><th>No</th><th>Nama Anggota</th><th>Jabatan</th><th>Ket</th></tr>
-                <tr><td>1</td><td>Cahyo Pratama</td><td>Ketua</td><td>Nelayan aktif</td></tr>
-                <tr><td>2</td><td>Agus Salim</td><td>Sekretaris</td><td>Administrasi</td></tr>
-                <tr><td>3</td><td>Yuni Astuti</td><td>Bendahara</td><td>Keuangan</td></tr>
-              </table>
-            </div>
-          </div>
-          <div id="anggota4" class="tab-panel">
-            <div class="table-wrap">
-              <table>
-                <tr><th>No</th><th>Nama Anggota</th><th>Jabatan</th><th>Ket</th></tr>
-                <tr><td>1</td><td>Dewi Lestari</td><td>Ketua</td><td>Nelayan aktif</td></tr>
-                <tr><td>2</td><td>Fauzan Ridwan</td><td>Sekretaris</td><td>Administrasi</td></tr>
-                <tr><td>3</td><td>Lisa Kartika</td><td>Bendahara</td><td>Keuangan</td></tr>
-              </table>
-            </div>
-          </div>
+          <div id="anggota1" class="tab-panel active"><div class="table-wrap"><table><tr><th>No</th><th>Nama Anggota</th><th>Jabatan</th><th>Ket</th></tr><tr><td>1</td><td>Andi Saputra</td><td>Ketua</td><td>Nelayan aktif</td></tr><tr><td>2</td><td>Rahmat Hidayat</td><td>Sekretaris</td><td>Administrasi</td></tr><tr><td>3</td><td>Siti Nurhaliza</td><td>Bendahara</td><td>Keuangan</td></tr></table></div></div>
+          <div id="anggota2" class="tab-panel"><div class="table-wrap"><table><tr><th>No</th><th>Nama Anggota</th><th>Jabatan</th><th>Ket</th></tr><tr><td>1</td><td>Budi Santoso</td><td>Ketua</td><td>Nelayan aktif</td></tr><tr><td>2</td><td>Muhammad Iqbal</td><td>Sekretaris</td><td>Administrasi</td></tr><tr><td>3</td><td>Rina Melati</td><td>Bendahara</td><td>Keuangan</td></tr></table></div></div>
+          <div id="anggota3" class="tab-panel"><div class="table-wrap"><table><tr><th>No</th><th>Nama Anggota</th><th>Jabatan</th><th>Ket</th></tr><tr><td>1</td><td>Cahyo Pratama</td><td>Ketua</td><td>Nelayan aktif</td></tr><tr><td>2</td><td>Agus Salim</td><td>Sekretaris</td><td>Administrasi</td></tr><tr><td>3</td><td>Yuni Astuti</td><td>Bendahara</td><td>Keuangan</td></tr></table></div></div>
+          <div id="anggota4" class="tab-panel"><div class="table-wrap"><table><tr><th>No</th><th>Nama Anggota</th><th>Jabatan</th><th>Ket</th></tr><tr><td>1</td><td>Dewi Lestari</td><td>Ketua</td><td>Nelayan aktif</td></tr><tr><td>2</td><td>Fauzan Ridwan</td><td>Sekretaris</td><td>Administrasi</td></tr><tr><td>3</td><td>Lisa Kartika</td><td>Bendahara</td><td>Keuangan</td></tr></table></div></div>
         </div>
       </section>
 
@@ -731,26 +440,11 @@
           <h2 class="section-title">Data Komoditas Perikanan</h2>
           <p class="section-desc">Lima komoditas unggulan berikut ditampilkan dengan gambar agar portal terlihat lebih interaktif dan informatif.</p>
           <div class="cards">
-            <div class="fish-card">
-              <img src="https://images.unsplash.com/photo-1544551763-ced4ebc1b4f9?auto=format&fit=crop&w=1200&q=80" alt="Ikan tuna segar">
-              <div class="body"><h4>Ikan Tuna</h4><p>Komoditas bernilai tinggi dengan permintaan pasar yang stabil untuk konsumsi lokal dan ekspor.</p></div>
-            </div>
-            <div class="fish-card">
-              <img src="https://images.unsplash.com/photo-1510130387422-82bed34b6b9d?auto=format&fit=crop&w=1200&q=80" alt="Ikan tongkol">
-              <div class="body"><h4>Ikan Tongkol</h4><p>Salah satu hasil tangkapan utama yang menjadi andalan nelayan dalam kegiatan harian.</p></div>
-            </div>
-            <div class="fish-card">
-              <img src="https://images.unsplash.com/photo-1534043464124-3be32fe000c9?auto=format&fit=crop&w=1200&q=80" alt="Udang segar">
-              <div class="body"><h4>Udang</h4><p>Komoditas unggulan bernilai ekonomi tinggi dengan peluang budidaya dan perdagangan yang besar.</p></div>
-            </div>
-            <div class="fish-card">
-              <img src="https://images.unsplash.com/photo-1574781330855-d0db8cc6a79d?auto=format&fit=crop&w=1200&q=80" alt="Cumi-cumi segar">
-              <div class="body"><h4>Cumi-cumi</h4><p>Produk perikanan yang banyak diminati untuk pasar kuliner karena kualitas dan cita rasanya.</p></div>
-            </div>
-            <div class="fish-card">
-              <img src="https://images.unsplash.com/photo-1514944152552-3e5f4f7b8c5f?auto=format&fit=crop&w=1200&q=80" alt="Kepiting segar">
-              <div class="body"><h4>Kepiting</h4><p>Komoditas premium dengan nilai jual tinggi serta peluang pengembangan usaha yang menjanjikan.</p></div>
-            </div>
+            <div class="fish-card"><img src="https://images.unsplash.com/photo-1544551763-ced4ebc1b4f9?auto=format&fit=crop&w=1200&q=80" alt="Ikan tuna segar"><div class="body"><h4>Ikan Tuna</h4><p>Komoditas bernilai tinggi dengan permintaan pasar yang stabil untuk konsumsi lokal dan ekspor.</p></div></div>
+            <div class="fish-card"><img src="https://images.unsplash.com/photo-1510130387422-82bed34b6b9d?auto=format&fit=crop&w=1200&q=80" alt="Ikan tongkol"><div class="body"><h4>Ikan Tongkol</h4><p>Salah satu hasil tangkapan utama yang menjadi andalan nelayan dalam kegiatan harian.</p></div></div>
+            <div class="fish-card"><img src="https://images.unsplash.com/photo-1534043464124-3be32fe000c9?auto=format&fit=crop&w=1200&q=80" alt="Udang segar"><div class="body"><h4>Udang</h4><p>Komoditas unggulan bernilai ekonomi tinggi dengan peluang budidaya dan perdagangan yang besar.</p></div></div>
+            <div class="fish-card"><img src="https://images.unsplash.com/photo-1574781330855-d0db8cc6a79d?auto=format&fit=crop&w=1200&q=80" alt="Cumi-cumi segar"><div class="body"><h4>Cumi-cumi</h4><p>Produk perikanan yang banyak diminati untuk pasar kuliner karena kualitas dan cita rasanya.</p></div></div>
+            <div class="fish-card"><img src="https://images.unsplash.com/photo-1514944152552-3e5f4f7b8c5f?auto=format&fit=crop&w=1200&q=80" alt="Kepiting segar"><div class="body"><h4>Kepiting</h4><p>Komoditas premium dengan nilai jual tinggi serta peluang pengembangan usaha yang menjanjikan.</p></div></div>
           </div>
         </div>
       </section>
@@ -784,9 +478,7 @@
       document.querySelectorAll('.top-nav a').forEach(a => a.classList.remove('active'));
       if(el) el.classList.add('active');
 
-      if (window.innerWidth <= 768) {
-        sidebar.classList.remove('open');
-      }
+      if (window.innerWidth <= 768) sidebar.classList.remove('open');
     }
 
     function showTab(event, id){
@@ -804,10 +496,8 @@
     }
 
     document.addEventListener('click', (e) => {
-      const submenuLink = e.target.closest('.submenu a');
-      if (submenuLink && window.innerWidth <= 768) {
-        sidebar.classList.remove('open');
-      }
+      const link = e.target.closest('.submenu a');
+      if (link && window.innerWidth <= 768) sidebar.classList.remove('open');
     });
   </script>
 </body>

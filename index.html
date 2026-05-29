@@ -4,12 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portal Sistem Informasi KUB</title>
+
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <style>
     :root{
       --bg:#f4f7f6;
-      --card:#fff;
+      --card:#ffffff;
       --primary:#1abc9c;
       --primary-dark:#16a085;
       --sidebar:#2c3e50;
@@ -23,7 +25,7 @@
       --sidebar-c:76px;
     }
 
-    *{margin:0;padding:0;box-sizing:border-box}
+    *{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
     body{
       font-family:'Poppins',sans-serif;
@@ -42,7 +44,7 @@
       position:fixed;
       top:12px;
       left:12px;
-      z-index:50;
+      z-index:60;
       width:46px;
       height:46px;
       border:none;
@@ -51,16 +53,17 @@
       color:#fff;
       box-shadow:var(--shadow);
       cursor:pointer;
+      align-items:center;
+      justify-content:center;
     }
 
-    /* Sidebar */
     .sidebar{
       width:var(--sidebar-c);
       background:linear-gradient(180deg, var(--sidebar) 0%, #233140 100%);
       color:#ecf0f1;
       position:fixed;
       inset:0 auto 0 0;
-      z-index:40;
+      z-index:50;
       box-shadow:var(--shadow);
       overflow:hidden;
       transition:transform .3s ease, width .3s ease;
@@ -79,13 +82,20 @@
       border-bottom:1px solid rgba(255,255,255,.08);
       white-space:nowrap;
     }
+
     .brand i{color:var(--primary);font-size:24px;min-width:28px;text-align:center}
-    .brand h2{font-size:16px;font-weight:700;opacity:0;transition:.25s ease}
+    .brand h2{
+      font-size:16px;
+      font-weight:700;
+      opacity:0;
+      transition:.25s ease;
+    }
     .sidebar.open .brand h2,
     .sidebar:hover .brand h2{opacity:1}
 
     .sidebar-menu{list-style:none;padding:12px 0}
     .menu-item{margin:6px 10px}
+
     .menu-toggle{
       width:100%;
       display:flex;
@@ -101,11 +111,14 @@
       font:inherit;
       text-align:left;
     }
+
     .menu-toggle i{width:28px;text-align:center;font-size:18px}
     .menu-label{opacity:0;transition:.25s ease;white-space:nowrap;font-size:14px;font-weight:500}
     .sidebar.open .menu-label,
     .sidebar:hover .menu-label{opacity:1}
-    .menu-toggle:hover,.menu-toggle.active{background:rgba(255,255,255,.08);color:#fff}
+    .menu-toggle:hover,
+    .menu-toggle.active{background:rgba(255,255,255,.08);color:#fff}
+
     .submenu{
       list-style:none;
       margin:0 0 0 18px;
@@ -115,7 +128,9 @@
       overflow:hidden;
       transition:max-height .35s ease;
     }
+
     .menu-item.open .submenu{max-height:900px}
+
     .submenu a{
       display:block;
       padding:10px 12px;
@@ -127,15 +142,16 @@
       transition:.2s ease;
       white-space:nowrap;
     }
+
     .submenu a:hover{background:rgba(26,188,156,.16);color:#fff}
 
-    /* Main */
     .main{
       margin-left:var(--sidebar-c);
       width:calc(100% - var(--sidebar-c));
       padding:20px;
       transition:margin-left .3s ease,width .3s ease;
     }
+
     .sidebar.open ~ .main,
     .sidebar:hover ~ .main{
       margin-left:var(--sidebar-w);
@@ -156,9 +172,11 @@
       gap:16px;
       flex-wrap:wrap;
     }
+
     .topbar h1{font-size:22px;color:#1f2d3d;margin-bottom:4px}
     .topbar p{color:var(--muted);font-size:13px}
     .top-actions{display:flex;gap:10px;flex-wrap:wrap}
+
     .pill{
       display:inline-flex;
       align-items:center;
@@ -172,7 +190,6 @@
       box-shadow:0 4px 14px rgba(0,0,0,.04);
     }
 
-    /* Top nav */
     .top-nav{
       background:#fff;
       border:1px solid var(--line);
@@ -184,6 +201,7 @@
       top:12px;
       z-index:20;
     }
+
     .top-nav ul{
       list-style:none;
       display:flex;
@@ -191,6 +209,7 @@
       gap:10px;
       flex-wrap:wrap;
     }
+
     .top-nav a{
       display:block;
       text-decoration:none;
@@ -201,11 +220,17 @@
       transition:.25s ease;
       background:#f8fafc;
     }
-    .top-nav a:hover,.top-nav a.active{background:var(--primary);color:#fff}
+
+    .top-nav a:hover,
+    .top-nav a.active{background:var(--primary);color:#fff}
 
     .section{display:none;animation:fadeIn .35s ease}
     .section.active{display:block}
-    @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+    @keyframes fadeIn{
+      from{opacity:0;transform:translateY(10px)}
+      to{opacity:1;transform:translateY(0)}
+    }
 
     .card{
       background:var(--card);
@@ -219,7 +244,13 @@
     .section-title{font-size:20px;margin-bottom:12px;color:#213547}
     .section-desc{color:var(--muted);margin-bottom:16px;line-height:1.7;font-size:14px}
 
-    .tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+    .tabs{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:16px;
+    }
+
     .tab-btn{
       border:none;
       background:#eef4f6;
@@ -231,7 +262,9 @@
       transition:.25s ease;
       min-height:42px;
     }
-    .tab-btn.active,.tab-btn:hover{background:var(--primary);color:#fff}
+
+    .tab-btn.active,
+    .tab-btn:hover{background:var(--primary);color:#fff}
 
     .tab-panel{display:none}
     .tab-panel.active{display:block}
@@ -243,16 +276,39 @@
       border-radius:14px;
       background:#fff;
     }
-    table{width:100%;border-collapse:collapse;min-width:620px}
-    th,td{border:1px solid #e9edf2;padding:12px 14px;text-align:left;vertical-align:top;font-size:14px}
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:620px;
+    }
+
+    th,td{
+      border:1px solid #e9edf2;
+      padding:12px 14px;
+      text-align:left;
+      vertical-align:top;
+      font-size:14px;
+    }
+
     th{background:#f8fbfc;font-weight:600}
-    .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:#e8f8f5;color:#0f766e;font-size:12px;font-weight:600}
+
+    .badge{
+      display:inline-block;
+      padding:6px 10px;
+      border-radius:999px;
+      background:#e8f8f5;
+      color:#0f766e;
+      font-size:12px;
+      font-weight:600;
+    }
 
     .cards{
       display:grid;
       grid-template-columns:repeat(3,minmax(0,1fr));
       gap:16px;
     }
+
     .fish-card{
       background:#fff;
       border:1px solid var(--line);
@@ -261,6 +317,7 @@
       box-shadow:0 8px 22px rgba(0,0,0,.06);
       transition:.25s ease;
     }
+
     .fish-card:hover{transform:translateY(-4px)}
     .fish-card img{width:100%;height:180px;object-fit:cover;display:block}
     .fish-card .body{padding:16px}
@@ -273,6 +330,7 @@
       border:1px solid var(--line);
       background:linear-gradient(180deg,#fff,#fbfdff);
     }
+
     .info-box h4{margin-bottom:8px;font-size:15px}
     .info-box p{color:var(--muted);line-height:1.7;font-size:14px}
 
@@ -281,15 +339,14 @@
     }
 
     @media (max-width: 768px){
-      .mobile-toggle{display:flex;align-items:center;justify-content:center}
+      .mobile-toggle{display:flex}
 
       .sidebar{
         transform:translateX(-100%);
         width:var(--sidebar-w);
       }
-      .sidebar.open{
-        transform:translateX(0);
-      }
+
+      .sidebar.open{transform:translateX(0)}
 
       .main,
       .sidebar.open ~ .main,
@@ -321,7 +378,7 @@
   </style>
 </head>
 <body>
-  <button class="mobile-toggle" onclick="toggleSidebar()">
+  <button class="mobile-toggle" id="mobileToggle" aria-controls="sidebar" aria-expanded="false">
     <i class="fa-solid fa-bars"></i>
   </button>
 
@@ -334,10 +391,11 @@
 
       <ul class="sidebar-menu">
         <li class="menu-item open">
-          <button class="menu-toggle active" onclick="toggleSubmenu(this)">
+          <button class="menu-toggle active" type="button" onclick="toggleSubmenu(this)" aria-expanded="true">
             <i class="fa-solid fa-ellipsis-vertical"></i>
             <span class="menu-label">Menu Utama</span>
           </button>
+
           <ul class="submenu">
             <li><a href="#agenda" onclick="showSection('agenda', this)">Tamu Kelompok / Agenda Surat</a></li>
             <li><a href="#kas" onclick="showSection('kas', this)">Kas Kelompok</a></li>
@@ -380,40 +438,146 @@
         <div class="card">
           <h2 class="section-title">Sejarah Kelompok</h2>
           <p class="section-desc">Berikut ini sejarah singkat terbentuknya KUB.</p>
-          <div class="tabs">
-            <button class="tab-btn active" onclick="showTab(event,'kub1')">KUB Sumber Makmur</button>
-            <button class="tab-btn" onclick="showTab(event,'kub2')">KUB Angsa Laut</button>
-            <button class="tab-btn" onclick="showTab(event,'kub3')">KUB Intimung Taka</button>
-            <button class="tab-btn" onclick="showTab(event,'kub4')">KUB Usaha Nelayan</button>
+
+          <div class="tabs" role="tablist" aria-label="Sejarah KUB">
+            <button class="tab-btn active" type="button" onclick="showTab(event,'kub1')" aria-selected="true">KUB Sumber Makmur</button>
+            <button class="tab-btn" type="button" onclick="showTab(event,'kub2')" aria-selected="false">KUB Angsa Laut</button>
+            <button class="tab-btn" type="button" onclick="showTab(event,'kub3')" aria-selected="false">KUB Intimung Taka</button>
+            <button class="tab-btn" type="button" onclick="showTab(event,'kub4')" aria-selected="false">KUB Usaha Nelayan</button>
           </div>
-          <div id="kub1" class="tab-panel active"><div class="info-box"><h4>KUB Sumber Makmur</h4><p>Didirikan untuk meningkatkan kemampuaan masyarakat dalam menghadapi berbagai permasalahan dan kebutuhannya dengan strategi yaang dilakukan untuk pemberdayaan nelayan dengan tujuan meningkatkan pendapatan nelaayaan dan menciptakan lapangan pekerjaan.</p></div></div>
-          <div id="kub2" class="tab-panel"><div class="info-box"><h4>KUB Angsa Laut</h4><p>Berawal dari kumpulan nelayan yang melakukan penangkapan secara individu, terdapat banyak masalah yang tidak dapat diselesaikan secara individu tapi dapat diselesaikan secara bersama-sama menjadi landasan terbentuknya KUB ini yang dikenal dengan KUB Angsa Laut.</p></div></div>
-          <div id="kub3" class="tab-panel"><div class="info-box"><h4>KUB Intimung Taka</h4><p>Berasal dari Kabupaten Bulungan yang memiliki potensi perikanan yang besar baik disungai maupun dilaut, namun dengan keterbatasan teknologi penangkapan, minim modal dan tingkat sosial ekonominya yang minim. Diperlukan pembinaan dan peningkatan yang dilakukan melalui sebuah kelompok usaha bersama guna mempercepat laju perkembangan penangkapan ikan.</p></div></div>
-          <div id="kub4" class="tab-panel"><div class="info-box"><h4>KUB Usaha Nelayan</h4><p>Terbentuk melalui Musyawarah Para Penangkap Ikan dengan tujuan meningkatkan kerjasama antar anggota, meningkatkan akses pemasaran dan meningkatkan kapasitas SDM nelayan dalam kelompok.</p></div></div>
+
+          <div id="kub1" class="tab-panel active" role="tabpanel">
+            <div class="info-box">
+              <h4>KUB Sumber Makmur</h4>
+              <p>Didirikan untuk meningkatkan kemampuan masyarakat dalam menghadapi berbagai permasalahan dan kebutuhannya melalui pemberdayaan nelayan dengan tujuan meningkatkan pendapatan dan menciptakan lapangan pekerjaan.</p>
+            </div>
+          </div>
+
+          <div id="kub2" class="tab-panel" role="tabpanel">
+            <div class="info-box">
+              <h4>KUB Angsa Laut</h4>
+              <p>Berawal dari kumpulan nelayan yang melakukan penangkapan secara individu. Banyak masalah tidak dapat diselesaikan sendiri, sehingga terbentuklah KUB ini sebagai wadah penyelesaian bersama.</p>
+            </div>
+          </div>
+
+          <div id="kub3" class="tab-panel" role="tabpanel">
+            <div class="info-box">
+              <h4>KUB Intimung Taka</h4>
+              <p>Berasal dari Kabupaten Bulungan yang memiliki potensi perikanan besar, tetapi masih terkendala teknologi, modal, dan kondisi sosial ekonomi. KUB dibentuk untuk mempercepat perkembangan usaha tangkap ikan.</p>
+            </div>
+          </div>
+
+          <div id="kub4" class="tab-panel" role="tabpanel">
+            <div class="info-box">
+              <h4>KUB Usaha Nelayan</h4>
+              <p>Terbentuk melalui musyawarah para penangkap ikan dengan tujuan meningkatkan kerja sama, akses pemasaran, dan kapasitas sumber daya manusia nelayan dalam kelompok.</p>
+            </div>
+          </div>
         </div>
       </section>
 
       <section id="data-dasar" class="section">
         <div class="card">
           <h2 class="section-title">Data Dasar</h2>
-          <p class="section-desc">Berikut Profil singkat KUB.</p>
-          <div class="tabs">
-            <button class="tab-btn active" onclick="showTab(event,'dasar1')">KUB Sumber Makmur</button>
-            <button class="tab-btn" onclick="showTab(event,'dasar2')">KUB Angsa Laut</button>
-            <button class="tab-btn" onclick="showTab(event,'dasar3')">KUB Intimung Taka</button>
-            <button class="tab-btn" onclick="showTab(event,'dasar4')">KUB Usaha Nelayan</button>
+          <p class="section-desc">Berikut profil singkat KUB.</p>
+
+          <div class="tabs" role="tablist" aria-label="Data dasar KUB">
+            <button class="tab-btn active" type="button" onclick="showTab(event,'dasar1')" aria-selected="true">KUB Sumber Makmur</button>
+            <button class="tab-btn" type="button" onclick="showTab(event,'dasar2')" aria-selected="false">KUB Angsa Laut</button>
+            <button class="tab-btn" type="button" onclick="showTab(event,'dasar3')" aria-selected="false">KUB Intimung Taka</button>
+            <button class="tab-btn" type="button" onclick="showTab(event,'dasar4')" aria-selected="false">KUB Usaha Nelayan</button>
           </div>
-          <div id="dasar1" class="tab-panel active">
-            <div class="table-wrap"><table><tr><th>Nama KUB</th><th>Tahun Berdiri</th><th>Status</th><th>Nama Pendiri/Ketua</th></tr><tr><td>KUB Sumber Makmur</td><td>2013</td><td><span class="badge">Aktif</span></td><td>Junaidi</td></tr></table></div>
+
+          <div id="dasar1" class="tab-panel active" role="tabpanel">
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Nama KUB</th>
+                    <th>Tahun Berdiri</th>
+                    <th>Status</th>
+                    <th>Nama Pendiri/Ketua</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>KUB Sumber Makmur</td>
+                    <td>2013</td>
+                    <td><span class="badge">Aktif</span></td>
+                    <td>Junaidi</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
-          <div id="dasar2" class="tab-panel">
-            <div class="table-wrap"><table><tr><th>Nama KUB</th><th>Tahun Berdiri</th><th>Status</th><th>Nama Pendiri/Ketua</th></tr><tr><td>KUB Angsa Laut</td><td>2023</td><td><span class="badge">Aktif</span></td><td>Muchsin</td></tr></table></div>
+
+          <div id="dasar2" class="tab-panel" role="tabpanel">
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Nama KUB</th>
+                    <th>Tahun Berdiri</th>
+                    <th>Status</th>
+                    <th>Nama Pendiri/Ketua</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>KUB Angsa Laut</td>
+                    <td>2023</td>
+                    <td><span class="badge">Aktif</span></td>
+                    <td>Muchsin</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
-          <div id="dasar3" class="tab-panel">
-            <div class="table-wrap"><table><tr><th>Nama KUB</th><th>Tahun Berdiri</th><th>Status</th><th>Nama Pendiri/Ketua</th></tr><tr><td>KUB Intimung Taka</td><td>2014</td><td><span class="badge">Aktif</span></td><td>Adria Saputra</td></tr></table></div>
+
+          <div id="dasar3" class="tab-panel" role="tabpanel">
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Nama KUB</th>
+                    <th>Tahun Berdiri</th>
+                    <th>Status</th>
+                    <th>Nama Pendiri/Ketua</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>KUB Intimung Taka</td>
+                    <td>2014</td>
+                    <td><span class="badge">Aktif</span></td>
+                    <td>Adria Saputra</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
-          <div id="dasar4" class="tab-panel">
-            <div class="table-wrap"><table><tr><th>Nama KUB</th><th>Tahun Berdiri</th><th>Status</th><th>Nama Pendiri/Ketua</th></tr><tr><td>KUB Usaha Nelayan</td><td>2015</td><td><span class="badge">Aktif</span></td><td>Sukardiman</td></tr></table></div>
+
+          <div id="dasar4" class="tab-panel" role="tabpanel">
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Nama KUB</th>
+                    <th>Tahun Berdiri</th>
+                    <th>Status</th>
+                    <th>Nama Pendiri/Ketua</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>KUB Usaha Nelayan</td>
+                    <td>2015</td>
+                    <td><span class="badge">Aktif</span></td>
+                    <td>Sukardiman</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </section>
@@ -421,17 +585,131 @@
       <section id="keanggotaan" class="section">
         <div class="card">
           <h2 class="section-title">Data Keanggotaan</h2>
-          <p class="section-desc">Setiap KUB memiliki anggota-anggota dengan Stuktur.</p>
-          <div class="tabs">
-            <button class="tab-btn active" onclick="showTab(event,'anggota1')">KUB Sumber Makmur</button>
-            <button class="tab-btn" onclick="showTab(event,'anggota2')">KUB Angsa Laut</button>
-            <button class="tab-btn" onclick="showTab(event,'anggota3')">KUB Intimung Taka</button>
-            <button class="tab-btn" onclick="showTab(event,'anggota4')">KUB Usaha Nelayan</button>
+          <p class="section-desc">Setiap KUB memiliki anggota dengan struktur jabatan yang berbeda.</p>
+
+          <div class="tabs" role="tablist" aria-label="Keanggotaan KUB">
+            <button class="tab-btn active" type="button" onclick="showTab(event,'anggota1')" aria-selected="true">KUB Sumber Makmur</button>
+            <button class="tab-btn" type="button" onclick="showTab(event,'anggota2')" aria-selected="false">KUB Angsa Laut</button>
+            <button class="tab-btn" type="button" onclick="showTab(event,'anggota3')" aria-selected="false">KUB Intimung Taka</button>
+            <button class="tab-btn" type="button" onclick="showTab(event,'anggota4')" aria-selected="false">KUB Usaha Nelayan</button>
           </div>
-          <div id="anggota1" class="tab-panel active"><div class="table-wrap"><table><tr><th>No</th><th>Nama Anggota</th><th>Jabatan</th><th>Alamat</th></tr><tr><td>1</td><td>Junaidi</td><td>Ketua</td><td>Desa Klampis Timur</td></tr><tr><td>2</td><td>Nanang</td><td>Sekretaris</td><td>Desa Klampis Timur</td></tr><tr><td>3</td><td>Desir</td><td>Bendahara</td><td>Desa Klampis Timur</td></tr><tr><td>4</td><td>Supyan</td><td>Anggota</td><td>Desa Klampis Timur</td></tr><tr><td>5</td><td>Agus Efendi</td><td>Anggota</td><td>Desa Klampis Timur</td></tr><tr><td>6</td><td>Hoirul Anam</td><td>Anggota</td><td>Desa Klampis Timur</td></tr><tr><td>7</td><td>Efendi</td><td>Anggota</td><td>Desa Klampis Timur</td></tr><tr><td>8</td><td>Muzakki</td><td>Anggota</td><td>Desa Klampis Timur</td></tr><tr><td>9</td><td>Hanif</td><td>Anggota</td><td>Desa Klampis Timur</td></tr><tr><td>10</td><td>M. Amin</td><td>Anggota</td><td>Desa Klampis Timur</td></tr><tr><td>11</td><td>Subairi</td><td>Anggota</td><td>Desa Klampis Timur</td></tr><tr><td>12</td><td>Kadin</td><td>Anggota</td><td>Desa Klampis Timur</td></tr><tr><td>13</td><td>Syaiful</td><td>Anggota</td><td>Desa Klampis Timur</td></tr><tr><td>14</td><td>Moh Syafii</td><td>Anggota</td><td>Desa Klampis Timur</td></tr><tr><td>15</td><td>Saiful Suhdi</td><td>Anggota</td><td>Desa Klampis Timur</td></tr><tr><td>16</td><td>Sofi</td><td>Anggota</td><td>Desa Klampis Timur</td></tr></table></div></div>
-          <div id="anggota2" class="tab-panel"><div class="table-wrap"><table><tr><th>No</th><th>Nama Anggota</th><th>Jabatan</th><th>Alamat</th></tr><tr><td>1</td><td>Muchsin</td><td>Ketua</td><td>SAMKAI</td></tr><tr><td>2</td><td>Abdul Karim</td><td>Sekretaris</td><td>SAMKAI</td></tr><tr><td>3</td><td>Zulkarnaen Arifin</td><td>Bendahara</td><td>SAMKAI</td></tr><tr><td>4</td><td>Arifin</td><td>Anggota</td><td>SAMKAI</td></tr><tr><td>5</td><td>Sudirman A</td><td>Anggota</td><td>SAMKAI</td></tr><tr><td>6</td><td>Nasir DG Mamu</td><td>Anggota</td><td>SAMKAI</td></tr><tr><td>7</td><td>Alimuddin</td><td>Anggota</td><td>SAMKAI</td></tr><tr><td>8</td><td>Mustafa</td><td>Anggota</td><td>SAMKAI</td></tr><tr><td>9</td><td>Manai</td><td>Anggota</td><td>SAMKAI</td></tr><tr><td>10</td><td>Amiruddin</td><td>Anggota</td><td>SAMKAI</td></tr><tr><td>11</td><td>Rusli</td><td>Anggota</td><td>SAMKAI</td></tr></table></div></div>
-          <div id="anggota3" class="tab-panel"><div class="table-wrap"><table><tr><th>No</th><th>Nama Anggota</th><th>Jabatan</th><th>Alamat</th></tr><tr><td>1</td><td>Adria Saputra</td><td>Ketua</td><td>Jl. Manunggal RT.06 Desa Bunyu Barat Kec. Bunyu</td></tr><tr><td>2</td><td>Nanang Jainal M.</td><td>Sekretaris</td><td>Jl. Manunggal RT.06 Desa Bunyu Barat Kec. Bunyu</td></tr><tr><td>3</td><td>Sukirman</td><td>Bendahara</td><td>Jl. Manunggal RT.06 Desa Bunyu Barat Kec. Bunyu</td></tr><tr><td>4</td><td>Achmad Yani</td><td>Anggota</td><td>Jl. Manunggal RT.06 Desa Bunyu Barat Kec. Bunyu</td></tr><tr><td>5</td><td>Achmad Lubis</td><td>Anggota</td><td>Jl. Manunggal RT.06 Desa Bunyu Barat Kec. Bunyu</td></tr><tr><td>6</td><td>Hamidun</td><td>Anggota</td><td>Jl. Manunggal RT.06 Desa Bunyu Barat Kec. Bunyu</td></tr><tr><td>7</td><td>M. Noor</td><td>Anggota</td><td>Jl. Manunggal RT.06 Desa Bunyu Barat Kec. Bunyu</td></tr><tr><td>8</td><td>Mahmud</td><td>Anggota</td><td>Jl. Manunggal RT.06 Desa Bunyu Barat Kec. Bunyu</td></tr><tr><td>9</td><td>Nasrun</td><td>Anggota</td><td>Jl. Manunggal RT.06 Desa Bunyu Barat Kec. Bunyu</td></tr><tr><td>10</td><td>Saparudin</td><td>Anggota</td><td>Jl. Manunggal RT.06 Desa Bunyu Barat Kec. Bunyu</td></tr><tr><td>11</td><td>Abdullah</td><td>Anggota</td><td>Jl. Manunggal RT.06 Desa Bunyu Barat Kec. Bunyu</td></tr><tr><td>12</td><td>Abdullah</td><td>Anggota</td><td>Jl. Manunggal RT.06 Desa Bunyu Barat Kec. Bunyu</td></tr></table></div></div>
-          <div id="anggota4" class="tab-panel"><div class="table-wrap"><table><tr><th>No</th><th>Nama Anggota</th><th>Jabatan</th><th>Alamat</th></tr><tr><td>1</td><td>Sukardiman</td><td>Ketua</td><td>Desa Watusa</td></tr><tr><td>2</td><td>Hasan</td><td>Sekretaris</td><td>Desa Watusa</td></tr><tr><td>3</td><td>Madi</td><td>Bendahara</td><td>Desa Watusa</td></tr><tr><td>4</td><td>Anto</td><td>Anggota</td><td>Desa Watusa</td></tr><tr><td>5</td><td>Muh Ansar</td><td>Anggota</td><td>Desa Watusa</td></tr></table><tr><td>6</td><td>Arifin K</td><td>Anggota</td><td>Desa Watusa</td></tr><tr><td>7</td><td>Arfa</td><td>Anggota</td><td>Desa Watusa</td></tr><tr><td>8</td><td>Kambe</td><td>Anggota</td><td>Desa Watusa</td></tr><tr><td>9</td><td>Lakali</td><td>Anggota</td><td>Desa Watusa</td></tr><tr><td>10</td><td>Sukaryo</td><td>Anggota</td><td>Desa Watusa</td></tr></div></div>
+
+          <div id="anggota1" class="tab-panel active" role="tabpanel">
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Nama Anggota</th>
+                    <th>Jabatan</th>
+                    <th>Alamat</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>1</td><td>Junaidi</td><td>Ketua</td><td>Desa Klampis Timur</td></tr>
+                  <tr><td>2</td><td>Nanang</td><td>Sekretaris</td><td>Desa Klampis Timur</td></tr>
+                  <tr><td>3</td><td>Desir</td><td>Bendahara</td><td>Desa Klampis Timur</td></tr>
+                  <tr><td>4</td><td>Supyan</td><td>Anggota</td><td>Desa Klampis Timur</td></tr>
+                  <tr><td>5</td><td>Agus Efendi</td><td>Anggota</td><td>Desa Klampis Timur</td></tr>
+                  <tr><td>6</td><td>Hoirul Anam</td><td>Anggota</td><td>Desa Klampis Timur</td></tr>
+                  <tr><td>7</td><td>Efendi</td><td>Anggota</td><td>Desa Klampis Timur</td></tr>
+                  <tr><td>8</td><td>Muzakki</td><td>Anggota</td><td>Desa Klampis Timur</td></tr>
+                  <tr><td>9</td><td>Hanif</td><td>Anggota</td><td>Desa Klampis Timur</td></tr>
+                  <tr><td>10</td><td>M. Amin</td><td>Anggota</td><td>Desa Klampis Timur</td></tr>
+                  <tr><td>11</td><td>Subairi</td><td>Anggota</td><td>Desa Klampis Timur</td></tr>
+                  <tr><td>12</td><td>Kadin</td><td>Anggota</td><td>Desa Klampis Timur</td></tr>
+                  <tr><td>13</td><td>Syaiful</td><td>Anggota</td><td>Desa Klampis Timur</td></tr>
+                  <tr><td>14</td><td>Moh Syafii</td><td>Anggota</td><td>Desa Klampis Timur</td></tr>
+                  <tr><td>15</td><td>Saiful Suhdi</td><td>Anggota</td><td>Desa Klampis Timur</td></tr>
+                  <tr><td>16</td><td>Sofi</td><td>Anggota</td><td>Desa Klampis Timur</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div id="anggota2" class="tab-panel" role="tabpanel">
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Nama Anggota</th>
+                    <th>Jabatan</th>
+                    <th>Alamat</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>1</td><td>Muchsin</td><td>Ketua</td><td>SAMKAI</td></tr>
+                  <tr><td>2</td><td>Abdul Karim</td><td>Sekretaris</td><td>SAMKAI</td></tr>
+                  <tr><td>3</td><td>Zulkarnaen Arifin</td><td>Bendahara</td><td>SAMKAI</td></tr>
+                  <tr><td>4</td><td>Arifin</td><td>Anggota</td><td>SAMKAI</td></tr>
+                  <tr><td>5</td><td>Sudirman A</td><td>Anggota</td><td>SAMKAI</td></tr>
+                  <tr><td>6</td><td>Nasir DG Mamu</td><td>Anggota</td><td>SAMKAI</td></tr>
+                  <tr><td>7</td><td>Alimuddin</td><td>Anggota</td><td>SAMKAI</td></tr>
+                  <tr><td>8</td><td>Mustafa</td><td>Anggota</td><td>SAMKAI</td></tr>
+                  <tr><td>9</td><td>Manai</td><td>Anggota</td><td>SAMKAI</td></tr>
+                  <tr><td>10</td><td>Amiruddin</td><td>Anggota</td><td>SAMKAI</td></tr>
+                  <tr><td>11</td><td>Rusli</td><td>Anggota</td><td>SAMKAI</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div id="anggota3" class="tab-panel" role="tabpanel">
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Nama Anggota</th>
+                    <th>Jabatan</th>
+                    <th>Alamat</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>1</td><td>Adria Saputra</td><td>Ketua</td><td>Jl. Manunggal RT.06 Desa Bunyu Barat Kec. Bunyu</td></tr>
+                  <tr><td>2</td><td>Nanang Jainal M.</td><td>Sekretaris</td><td>Jl. Manunggal RT.06 Desa Bunyu Barat Kec. Bunyu</td></tr>
+                  <tr><td>3</td><td>Sukirman</td><td>Bendahara</td><td>Jl. Manunggal RT.06 Desa Bunyu Barat Kec. Bunyu</td></tr>
+                  <tr><td>4</td><td>Achmad Yani</td><td>Anggota</td><td>Jl. Manunggal RT.06 Desa Bunyu Barat Kec. Bunyu</td></tr>
+                  <tr><td>5</td><td>Achmad Lubis</td><td>Anggota</td><td>Jl. Manunggal RT.06 Desa Bunyu Barat Kec. Bunyu</td></tr>
+                  <tr><td>6</td><td>Hamidun</td><td>Anggota</td><td>Jl. Manunggal RT.06 Desa Bunyu Barat Kec. Bunyu</td></tr>
+                  <tr><td>7</td><td>M. Noor</td><td>Anggota</td><td>Jl. Manunggal RT.06 Desa Bunyu Barat Kec. Bunyu</td></tr>
+                  <tr><td>8</td><td>Mahmud</td><td>Anggota</td><td>Jl. Manunggal RT.06 Desa Bunyu Barat Kec. Bunyu</td></tr>
+                  <tr><td>9</td><td>Nasrun</td><td>Anggota</td><td>Jl. Manunggal RT.06 Desa Bunyu Barat Kec. Bunyu</td></tr>
+                  <tr><td>10</td><td>Saparudin</td><td>Anggota</td><td>Jl. Manunggal RT.06 Desa Bunyu Barat Kec. Bunyu</td></tr>
+                  <tr><td>11</td><td>Abdullah</td><td>Anggota</td><td>Jl. Manunggal RT.06 Desa Bunyu Barat Kec. Bunyu</td></tr>
+                  <tr><td>12</td><td>Abdullah</td><td>Anggota</td><td>Jl. Manunggal RT.06 Desa Bunyu Barat Kec. Bunyu</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div id="anggota4" class="tab-panel" role="tabpanel">
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Nama Anggota</th>
+                    <th>Jabatan</th>
+                    <th>Alamat</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>1</td><td>Sukardiman</td><td>Ketua</td><td>Desa Watusa</td></tr>
+                  <tr><td>2</td><td>Hasan</td><td>Sekretaris</td><td>Desa Watusa</td></tr>
+                  <tr><td>3</td><td>Madi</td><td>Bendahara</td><td>Desa Watusa</td></tr>
+                  <tr><td>4</td><td>Anto</td><td>Anggota</td><td>Desa Watusa</td></tr>
+                  <tr><td>5</td><td>Muh Ansar</td><td>Anggota</td><td>Desa Watusa</td></tr>
+                  <tr><td>6</td><td>Arifin K</td><td>Anggota</td><td>Desa Watusa</td></tr>
+                  <tr><td>7</td><td>Arfa</td><td>Anggota</td><td>Desa Watusa</td></tr>
+                  <tr><td>8</td><td>Kambe</td><td>Anggota</td><td>Desa Watusa</td></tr>
+                  <tr><td>9</td><td>Lakali</td><td>Anggota</td><td>Desa Watusa</td></tr>
+                  <tr><td>10</td><td>Sukaryo</td><td>Anggota</td><td>Desa Watusa</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -439,12 +717,47 @@
         <div class="card">
           <h2 class="section-title">Data Komoditas Perikanan</h2>
           <p class="section-desc">Lima komoditas unggulan yang dimiliki setiap KUB.</p>
+
           <div class="cards">
-            <div class="fish-card"><img src="TunaFish.jpg" alt="Ikan tuna segar"><div class="body"><h4>Ikan Tuna</h4><p>Komoditas bernilai tinggi dengan permintaan pasar yang stabil untuk konsumsi lokal dan ekspor.</p></div></div>
-            <div class="fish-card"><img src="TongkolFish.jpg" alt="Ikan tongkol"><div class="body"><h4>Ikan Tongkol</h4><p>Salah satu hasil tangkapan utama yang menjadi andalan nelayan dalam kegiatan harian.</p></div></div>
-            <div class="fish-card"><img src="Shrimp.jpg" alt="Udang segar"><div class="body"><h4>Udang</h4><p>Komoditas unggulan bernilai ekonomi tinggi dengan peluang budidaya dan perdagangan yang besar.</p></div></div>
-            <div class="fish-card"><img src="cumi.jpg" alt="Cumi-cumi segar"><div class="body"><h4>Cumi-cumi</h4><p>Produk perikanan yang banyak diminati untuk pasar kuliner karena kualitas dan cita rasanya.</p></div></div>
-            <div class="fish-card"><img src="crab.jpg" alt="Kepiting segar"><div class="body"><h4>Kepiting</h4><p>Komoditas premium dengan nilai jual tinggi serta peluang pengembangan usaha yang menjanjikan.</p></div></div>
+            <div class="fish-card">
+              <img src="TunaFish.jpg" alt="Ikan tuna segar">
+              <div class="body">
+                <h4>Ikan Tuna</h4>
+                <p>Komoditas bernilai tinggi dengan permintaan pasar yang stabil untuk konsumsi lokal dan ekspor.</p>
+              </div>
+            </div>
+
+            <div class="fish-card">
+              <img src="TongkolFish.jpg" alt="Ikan tongkol">
+              <div class="body">
+                <h4>Ikan Tongkol</h4>
+                <p>Salah satu hasil tangkapan utama yang menjadi andalan nelayan dalam kegiatan harian.</p>
+              </div>
+            </div>
+
+            <div class="fish-card">
+              <img src="Shrimp.jpg" alt="Udang segar">
+              <div class="body">
+                <h4>Udang</h4>
+                <p>Komoditas unggulan bernilai ekonomi tinggi dengan peluang budidaya dan perdagangan yang besar.</p>
+              </div>
+            </div>
+
+            <div class="fish-card">
+              <img src="cumi.jpg" alt="Cumi-cumi segar">
+              <div class="body">
+                <h4>Cumi-cumi</h4>
+                <p>Produk perikanan yang banyak diminati untuk pasar kuliner karena kualitas dan cita rasanya.</p>
+              </div>
+            </div>
+
+            <div class="fish-card">
+              <img src="crab.jpg" alt="Kepiting segar">
+              <div class="body">
+                <h4>Kepiting</h4>
+                <p>Komoditas premium dengan nilai jual tinggi serta peluang pengembangan usaha yang menjanjikan.</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -465,9 +778,12 @@
   <script>
     const sections = document.querySelectorAll('.section');
     const sidebar = document.getElementById('sidebar');
+    const mobileToggle = document.getElementById('mobileToggle');
 
     function toggleSidebar(){
       sidebar.classList.toggle('open');
+      const expanded = sidebar.classList.contains('open');
+      mobileToggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
     }
 
     function showSection(id, el){
@@ -478,26 +794,42 @@
       document.querySelectorAll('.top-nav a').forEach(a => a.classList.remove('active'));
       if(el) el.classList.add('active');
 
-      if (window.innerWidth <= 768) sidebar.classList.remove('open');
+      if (window.innerWidth <= 768) {
+        sidebar.classList.remove('open');
+        mobileToggle.setAttribute('aria-expanded', 'false');
+      }
     }
 
     function showTab(event, id){
-      const parent = event.target.closest('.card');
-      parent.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-      parent.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      const card = event.target.closest('.card');
+      const tabs = card.querySelectorAll('.tab-btn');
+      const panels = card.querySelectorAll('.tab-panel');
+
+      tabs.forEach(btn => {
+        btn.classList.remove('active');
+        btn.setAttribute('aria-selected', 'false');
+      });
+
+      panels.forEach(panel => panel.classList.remove('active'));
+
       document.getElementById(id).classList.add('active');
       event.target.classList.add('active');
+      event.target.setAttribute('aria-selected', 'true');
     }
 
     function toggleSubmenu(btn){
       const item = btn.closest('.menu-item');
       item.classList.toggle('open');
       btn.classList.toggle('active');
+      btn.setAttribute('aria-expanded', item.classList.contains('open') ? 'true' : 'false');
     }
 
     document.addEventListener('click', (e) => {
       const link = e.target.closest('.submenu a');
-      if (link && window.innerWidth <= 768) sidebar.classList.remove('open');
+      if (link && window.innerWidth <= 768) {
+        sidebar.classList.remove('open');
+        mobileToggle.setAttribute('aria-expanded', 'false');
+      }
     });
   </script>
 </body>

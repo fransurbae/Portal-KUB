@@ -224,6 +224,24 @@
     .top-nav a:hover,
     .top-nav a.active{background:var(--primary);color:#fff}
 
+    .top-nav .btn-nav-register{
+      background:#1abc9c;
+      color:#fff;
+    }
+
+    .top-nav .btn-nav-register:hover{
+      background:#16a085;
+    }
+
+    .top-nav .btn-nav-evaluate{
+      background:#3498db;
+      color:#fff;
+    }
+
+    .top-nav .btn-nav-evaluate:hover{
+      background:#2980b9;
+    }
+
     .section{display:none;animation:fadeIn .35s ease}
     .section.active{display:block}
 
@@ -334,6 +352,121 @@
     .info-box h4{margin-bottom:8px;font-size:15px}
     .info-box p{color:var(--muted);line-height:1.7;font-size:14px}
 
+    /* Style untuk button Akses Layanan di section */
+    .action-buttons{
+      display:flex;
+      gap:12px;
+      margin-bottom:20px;
+      flex-wrap:wrap;
+    }
+
+    .btn-fill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:12px 20px;
+      border:none;
+      border-radius:14px;
+      font-family:'Poppins',sans-serif;
+      font-size:14px;
+      font-weight:500;
+      cursor:pointer;
+      transition:.25s ease;
+      box-shadow:0 4px 14px rgba(0,0,0,.1);
+      text-decoration:none;
+    }
+
+    .btn-fill-view{
+      background:#3498db;
+      color:#fff;
+    }
+
+    .btn-fill-view:hover{
+      background:#2980b9;
+      transform:translateY(-2px);
+    }
+
+    .btn-fill-form{
+      background:var(--primary);
+      color:#fff;
+    }
+
+    .btn-fill-form:hover{
+      background:var(--primary-dark);
+      transform:translateY(-2px);
+    }
+
+    .form-container{
+      display:none;
+      animation:fadeIn .3s ease;
+    }
+
+    .form-container.active{
+      display:block;
+    }
+
+    .form-box{
+      background:#f8fafc;
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:20px;
+      margin-top:16px;
+    }
+
+    .form-group{
+      margin-bottom:16px;
+    }
+
+    .form-group label{
+      display:block;
+      margin-bottom:6px;
+      font-size:14px;
+      font-weight:500;
+      color:#2c3e50;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea{
+      width:100%;
+      padding:10px 14px;
+      border:1px solid var(--line);
+      border-radius:10px;
+      font-family:'Poppins',sans-serif;
+      font-size:14px;
+      transition:.25s ease;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus{
+      outline:none;
+      border-color:var(--primary);
+      box-shadow:0 0 0 3px rgba(26,188,156,.1);
+    }
+
+    .form-group textarea{
+      min-height:100px;
+      resize:vertical;
+    }
+
+    .btn-submit{
+      background:var(--primary);
+      color:#fff;
+      padding:12px 24px;
+      border:none;
+      border-radius:12px;
+      font-family:'Poppins',sans-serif;
+      font-size:14px;
+      font-weight:500;
+      cursor:pointer;
+      transition:.25s ease;
+    }
+
+    .btn-submit:hover{
+      background:var(--primary-dark);
+    }
+
     @media (max-width: 992px){
       .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
     }
@@ -368,6 +501,8 @@
       .card{padding:16px}
       .section-title{font-size:18px}
       .top-nav a{width:100%;text-align:center}
+      .action-buttons{flex-direction:column}
+      .btn-fill{width:100%;justify-content:center}
     }
 
     @media (max-width: 480px){
@@ -431,6 +566,12 @@
           <li><a href="#data-dasar" onclick="showSection('data-dasar', this)">Data Dasar</a></li>
           <li><a href="#keanggotaan" onclick="showSection('keanggotaan', this)">Data Keanggotaan</a></li>
           <li><a href="#komoditas" onclick="showSection('komoditas', this)">Data Komoditas</a></li>
+          <li><a href="#pendaftaran" class="btn-nav-register" onclick="showSection('pendaftaran', this)">
+            <i class="fa-solid fa-user-plus"></i> Pendaftaran
+          </a></li>
+          <li><a href="#penilaian" class="btn-nav-evaluate" onclick="showSection('penilaian', this)">
+            <i class="fa-solid fa-star"></i> Penilaian
+          </a></li>
         </ul>
       </nav>
 
@@ -762,16 +903,447 @@
         </div>
       </section>
 
-      <section id="agenda" class="section"><div class="card"><h2 class="section-title">Tamu Kelompok / Agenda Surat</h2><p class="section-desc">Ruang untuk mencatat tamu, surat masuk, dan agenda kegiatan kelompok.</p></div></section>
-      <section id="kas" class="section"><div class="card"><h2 class="section-title">Kas Kelompok</h2><p class="section-desc">Ruang untuk menampilkan pemasukan, pengeluaran, dan saldo kas kelompok.</p></div></section>
-      <section id="produksi" class="section"><div class="card"><h2 class="section-title">Produksi Kelompok / Hasil Tangkapan</h2><p class="section-desc">Ruang untuk mencatat hasil tangkapan dan produksi per periode.</p></div></section>
-      <section id="notulen" class="section"><div class="card"><h2 class="section-title">Notulen Rapat Kelompok</h2><p class="section-desc">Ruang dokumentasi hasil rapat dan keputusan kelompok.</p></div></section>
-      <section id="rencana-kegiatan" class="section"><div class="card"><h2 class="section-title">Rencana Kegiatan Kelompok</h2><p class="section-desc">Ruang penyusunan agenda kegiatan kelompok ke depan.</p></div></section>
-      <section id="rub" class="section"><div class="card"><h2 class="section-title">Rencana Usaha Bersama</h2><p class="section-desc">Ruang perencanaan usaha kolektif untuk pengembangan kelompok.</p></div></section>
-      <section id="inventaris" class="section"><div class="card"><h2 class="section-title">Inventaris Barang Kelompok</h2><p class="section-desc">Ruang pendataan perlengkapan, aset, dan barang milik kelompok.</p></div></section>
-      <section id="iuran" class="section"><div class="card"><h2 class="section-title">Iuran Kelompok</h2><p class="section-desc">Ruang pencatatan iuran anggota dan status pembayaran.</p></div></section>
-      <section id="simpanan" class="section"><div class="card"><h2 class="section-title">Simpan Pinjam Kelompok</h2><p class="section-desc">Ruang pengelolaan simpanan, pinjaman, dan pelunasan anggota.</p></div></section>
-      <section id="aktivitas" class="section"><div class="card"><h2 class="section-title">Aktivitas Kelompok</h2><p class="section-desc">Ruang untuk menampilkan aktivitas harian, mingguan, dan bulanan kelompok.</p></div></section>
+      <section id="pendaftaran" class="section">
+        <div class="card">
+          <h2 class="section-title">Pendaftaran Anggota/Komoditas Baru</h2>
+          <p class="section-desc">Formulir pendaftaran anggota baru atau komoditas baru ke dalam sistem KUB.</p>
+          <div class="info-box">
+            <h4>Formulir Pendaftaran</h4>
+            <p>Halaman formulir pendaftaran akan muncul di sini.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="penilaian" class="section">
+        <div class="card">
+          <h2 class="section-title">Penilaian Kinerja/Komoditas</h2>
+          <p class="section-desc">Formulir penilaian kinerja anggota atau kualitas komoditas perikanan.</p>
+          <div class="info-box">
+            <h4>Formulir Penilaian</h4>
+            <p>Halaman formulir penilaian akan muncul di sini.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="agenda" class="section">
+        <div class="card">
+          <h2 class="section-title">Tamu Kelompok / Agenda Surat</h2>
+          <p class="section-desc">Ruang untuk mencatat tamu, surat masuk, dan agenda kegiatan kelompok.</p>
+          
+          <div class="action-buttons">
+            <button class="btn-fill btn-fill-form" type="button" onclick="toggleForm('agenda-form')">
+              <i class="fa-solid fa-pen-to-square"></i> Akses Layanan
+            </button>
+          </div>
+
+          <div id="agenda-form" class="form-container">
+            <div class="form-box">
+              <h4 style="margin-bottom:16px;font-size:16px;color:#2c3e50">Formulir Pengisian Tamu Kelompok / Agenda Surat</h4>
+              <div class="form-group">
+                <label>Nama Tamu / Judul Surat</label>
+                <input type="text" placeholder="Masukkan nama tamu atau judul surat">
+              </div>
+              <div class="form-group">
+                <label>Tanggal</label>
+                <input type="date">
+              </div>
+              <div class="form-group">
+                <label>Kategori</label>
+                <select>
+                  <option value="">Pilih kategori</option>
+                  <option value="tamu">Tamu Kedatangan</option>
+                  <option value="surat-masuk">Surat Masuk</option>
+                  <option value="agenda">Agenda Kegiatan</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Keterangan</label>
+                <textarea placeholder="Masukkan keterangan additional"></textarea>
+              </div>
+              <button type="button" class="btn-submit">
+                <i class="fa-solid fa-save"></i> Simpan
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="kas" class="section">
+        <div class="card">
+          <h2 class="section-title">Kas Kelompok</h2>
+          <p class="section-desc">Ruang untuk menampilkan pemasukan, pengeluaran, dan saldo kas kelompok.</p>
+          
+          <div class="action-buttons">
+            <button class="btn-fill btn-fill-form" type="button" onclick="toggleForm('kas-form')">
+              <i class="fa-solid fa-pen-to-square"></i> Akses Layanan
+            </button>
+          </div>
+
+          <div id="kas-form" class="form-container">
+            <div class="form-box">
+              <h4 style="margin-bottom:16px;font-size:16px;color:#2c3e50">Formulir Pengisian Kas Kelompok</h4>
+              <div class="form-group">
+                <label>Jenis Transaksi</label>
+                <select>
+                  <option value="">Pilih jenis transaksi</option>
+                  <option value="pemasukan">Pemasukan</option>
+                  <option value="pengeluaran">Pengeluaran</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Jumlah (Rp)</label>
+                <input type="number" placeholder="Masukkan jumlah uang">
+              </div>
+              <div class="form-group">
+                <label>Tanggal</label>
+                <input type="date">
+              </div>
+              <div class="form-group">
+                <label>Keterangan</label>
+                <textarea placeholder="Masukkan keterangan transaksi"></textarea>
+              </div>
+              <button type="button" class="btn-submit">Simpan Transaksi</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="produksi" class="section">
+        <div class="card">
+          <h2 class="section-title">Produksi Kelompok / Hasil Tangkapan</h2>
+          <p class="section-desc">Ruang untuk mencatat hasil tangkapan dan produksi per periode.</p>
+          
+          <div class="action-buttons">
+            <button class="btn-fill btn-fill-form" type="button" onclick="toggleForm('produksi-form')">
+              <i class="fa-solid fa-pen-to-square"></i> Akses Layanan
+            </button>
+          </div>
+
+          <div id="produksi-form" class="form-container">
+            <div class="form-box">
+              <h4 style="margin-bottom:16px;font-size:16px;color:#2c3e50">Formulir Pengisian Produksi Kelompok</h4>
+              <div class="form-group">
+                <label>Jenis Ikan/Komoditas</label>
+                <select>
+                  <option value="">Pilih komoditas</option>
+                  <option value="tuna">Ikan Tuna</option>
+                  <option value="tongkol">Ikan Tongkol</option>
+                  <option value="udang">Udang</option>
+                  <option value="cumi">Cumi-cumi</option>
+                  <option value="kepiting">Kepiting</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Jumlah Tangkapan (kg)</label>
+                <input type="number" placeholder="Masukkan jumlah dalam kg">
+              </div>
+              <div class="form-group">
+                <label>Tanggal Tangkapan</label>
+                <input type="date">
+              </div>
+              <div class="form-group">
+                <label>Nama Nelayan</label>
+                <input type="text" placeholder="Masukkan nama nelayan">
+              </div>
+              <button type="button" class="btn-submit">Simpan Data Produksi</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="notulen" class="section">
+        <div class="card">
+          <h2 class="section-title">Notulen Rapat Kelompok</h2>
+          <p class="section-desc">Ruang dokumentasi hasil rapat dan keputusan kelompok.</p>
+          
+          <div class="action-buttons">
+            <button class="btn-fill btn-fill-form" type="button" onclick="toggleForm('notulen-form')">
+              <i class="fa-solid fa-pen-to-square"></i> Akses Layanan
+            </button>
+          </div>
+
+          <div id="notulen-form" class="form-container">
+            <div class="form-box">
+              <h4 style="margin-bottom:16px;font-size:16px;color:#2c3e50">Formulir Pengisian Notulen Rapat</h4>
+              <div class="form-group">
+                <label>Tanggal Rapat</label>
+                <input type="date">
+              </div>
+              <div class="form-group">
+                <label>Judul/Agenda Rapat</label>
+                <input type="text" placeholder="Masukkan judul rapat">
+              </div>
+              <div class="form-group">
+                <label>Peserta Rapat</label>
+                <input type="text" placeholder="Masukkan nama peserta">
+              </div>
+              <div class="form-group">
+                <label>Hasil Rapat / Keputusan</label>
+                <textarea placeholder="Masukkan hasil rapat atau keputusan"></textarea>
+              </div>
+              <button type="button" class="btn-submit">Simpan Notulen</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="rencana-kegiatan" class="section">
+        <div class="card">
+          <h2 class="section-title">Rencana Kegiatan Kelompok</h2>
+          <p class="section-desc">Ruang penyusunan agenda kegiatan kelompok ke depan.</p>
+          
+          <div class="action-buttons">
+            <button class="btn-fill btn-fill-form" type="button" onclick="toggleForm('rencana-form')">
+              <i class="fa-solid fa-pen-to-square"></i> Akses Layanan
+            </button>
+          </div>
+
+          <div id="rencana-form" class="form-container">
+            <div class="form-box">
+              <h4 style="margin-bottom:16px;font-size:16px;color:#2c3e50">Formulir Pengisian Rencana Kegiatan</h4>
+              <div class="form-group">
+                <label>Nama Kegiatan</label>
+                <input type="text" placeholder="Masukkan nama kegiatan">
+              </div>
+              <div class="form-group">
+                <label>Tanggal Rencana</label>
+                <input type="date">
+              </div>
+              <div class="form-group">
+                <label>Lokasi</label>
+                <input type="text" placeholder="Masukkan lokasi kegiatan">
+              </div>
+              <div class="form-group">
+                <label>Deskripsi Kegiatan</label>
+                <textarea placeholder="Masukkan deskripsi kegiatan"></textarea>
+              </div>
+              <button type="button" class="btn-submit">Simpan Rencana Kegiatan</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="rub" class="section">
+        <div class="card">
+          <h2 class="section-title">Rencana Usaha Bersama</h2>
+          <p class="section-desc">Ruang perencanaan usaha kolektif untuk pengembangan kelompok.</p>
+          
+          <div class="action-buttons">
+            <button class="btn-fill btn-fill-form" type="button" onclick="toggleForm('rub-form')">
+              <i class="fa-solid fa-pen-to-square"></i> Akses Layanan
+            </button>
+          </div>
+
+          <div id="rub-form" class="form-container">
+            <div class="form-box">
+              <h4 style="margin-bottom:16px;font-size:16px;color:#2c3e50">Formulir Pengisian Rencana Usaha Bersama</h4>
+              <div class="form-group">
+                <label>Nama Usaha</label>
+                <input type="text" placeholder="Masukkan nama usaha">
+              </div>
+              <div class="form-group">
+                <label>Jenis Usaha</label>
+                <select>
+                  <option value="">Pilih jenis usaha</option>
+                  <option value="tangkap">Usaha Tangkap</option>
+                  <option value="budidaya">Budidaya</option>
+                  <option value="pengolahan">Pengolahan Ikan</option>
+                  <option value="pemasaran">Pemasaran</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Anggaran (Rp)</label>
+                <input type="number" placeholder="Masukkan anggaran">
+              </div>
+              <div class="form-group">
+                <label>Deskripsi Rencana</label>
+                <textarea placeholder="Masukkan deskripsi rencana usaha"></textarea>
+              </div>
+              <button type="button" class="btn-submit">Simpan Rencana Usaha</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="inventaris" class="section">
+        <div class="card">
+          <h2 class="section-title">Inventaris Barang Kelompok</h2>
+          <p class="section-desc">Ruang pendataan perlengkapan, aset, dan barang milik kelompok.</p>
+          
+          <div class="action-buttons">
+            <button class="btn-fill btn-fill-form" type="button" onclick="toggleForm('inventaris-form')">
+              <i class="fa-solid fa-pen-to-square"></i> Akses Layanan
+            </button>
+          </div>
+
+          <div id="inventaris-form" class="form-container">
+            <div class="form-box">
+              <h4 style="margin-bottom:16px;font-size:16px;color:#2c3e50">Formulir Pengisian Inventaris Barang</h4>
+              <div class="form-group">
+                <label>Nama Barang</label>
+                <input type="text" placeholder="Masukkan nama barang">
+              </div>
+              <div class="form-group">
+                <label>Kategori</label>
+                <select>
+                  <option value="">Pilih kategori</option>
+                  <option value="perlengkapan">Perlengkapan</option>
+                  <option value="aset">Aset</option>
+                  <option value="peralatan">Peralatan</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Jumlah</label>
+                <input type="number" placeholder="Masukkan jumlah">
+              </div>
+              <div class="form-group">
+                <label>Tanggal Perolehan</label>
+                <input type="date">
+              </div>
+              <div class="form-group">
+                <label>Keterangan</label>
+                <textarea placeholder="Masukkan keterangan barang"></textarea>
+              </div>
+              <button type="button" class="btn-submit">Simpan Inventaris</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="iuran" class="section">
+        <div class="card">
+          <h2 class="section-title">Iuran Kelompok</h2>
+          <p class="section-desc">Ruang pencatatan iuran anggota dan status pembayaran.</p>
+          
+          <div class="action-buttons">
+            <button class="btn-fill btn-fill-form" type="button" onclick="toggleForm('iuran-form')">
+              <i class="fa-solid fa-pen-to-square"></i> Akses Layanan
+            </button>
+          </div>
+
+          <div id="iuran-form" class="form-container">
+            <div class="form-box">
+              <h4 style="margin-bottom:16px;font-size:16px;color:#2c3e50">Formulir Pengisian Iuran Kelompok</h4>
+              <div class="form-group">
+                <label>Nama Anggota</label>
+                <input type="text" placeholder="Masukkan nama anggota">
+              </div>
+              <div class="form-group">
+                <label>Jenis Iuran</label>
+                <select>
+                  <option value="">Pilih jenis iuran</option>
+                  <option value="bulanan">Iuran Bulanan</option>
+                  <option value="tahunan">Iuran Tahunan</option>
+                  <option value="khusus">Iuran Khusus</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Jumlah Iuran (Rp)</label>
+                <input type="number" placeholder="Masukkan jumlah iuran">
+              </div>
+              <div class="form-group">
+                <label>Bulan/Tahun</label>
+                <input type="month">
+              </div>
+              <div class="form-group">
+                <label>Status Pembayaran</label>
+                <select>
+                  <option value="">Pilih status</option>
+                  <option value="lunas">Lunas</option>
+                  <option value="belum">Belum Lunas</option>
+                </select>
+              </div>
+              <button type="button" class="btn-submit">Simpan Iuran</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="simpanan" class="section">
+        <div class="card">
+          <h2 class="section-title">Simpan Pinjam Kelompok</h2>
+          <p class="section-desc">Ruang pengelolaan simpanan, pinjaman, dan pelunasan anggota.</p>
+          
+          <div class="action-buttons">
+            <button class="btn-fill btn-fill-form" type="button" onclick="toggleForm('simpanan-form')">
+              <i class="fa-solid fa-pen-to-square"></i> Akses Layanan
+            </button>
+          </div>
+
+          <div id="simpanan-form" class="form-container">
+            <div class="form-box">
+              <h4 style="margin-bottom:16px;font-size:16px;color:#2c3e50">Formulir Pengisian Simpan Pinjam</h4>
+              <div class="form-group">
+                <label>Nama Anggota</label>
+                <input type="text" placeholder="Masukkan nama anggota">
+              </div>
+              <div class="form-group">
+                <label>Jenis Transaksi</label>
+                <select>
+                  <option value="">Pilih jenis transaksi</option>
+                  <option value="simpanan">Simpanan</option>
+                  <option value="pinjaman">Pinjaman</option>
+                  <option value="pelunasan">Pelunasan</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Jumlah (Rp)</label>
+                <input type="number" placeholder="Masukkan jumlah">
+              </div>
+              <div class="form-group">
+                <label>Tanggal</label>
+                <input type="date">
+              </div>
+              <div class="form-group">
+                <label>Keterangan</label>
+                <textarea placeholder="Masukkan keterangan"></textarea>
+              </div>
+              <button type="button" class="btn-submit">Simpan Transaksi</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="aktivitas" class="section">
+        <div class="card">
+          <h2 class="section-title">Aktivitas Kelompok</h2>
+          <p class="section-desc">Ruang untuk menampilkan aktivitas harian, mingguan, dan bulanan kelompok.</p>
+          
+          <div class="action-buttons">
+            <button class="btn-fill btn-fill-form" type="button" onclick="toggleForm('aktivitas-form')">
+              <i class="fa-solid fa-pen-to-square"></i> Akses Layanan
+            </button>
+          </div>
+
+          <div id="aktivitas-form" class="form-container">
+            <div class="form-box">
+              <h4 style="margin-bottom:16px;font-size:16px;color:#2c3e50">Formulir Pengisian Aktivitas Kelompok</h4>
+              <div class="form-group">
+                <label>Jenis Aktivitas</label>
+                <select>
+                  <option value="">Pilih jenis aktivitas</option>
+                  <option value="harian">Harian</option>
+                  <option value="mingguan">Mingguan</option>
+                  <option value="bulanan">Bulanan</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Nama Aktivitas</label>
+                <input type="text" placeholder="Masukkan nama aktivitas">
+              </div>
+              <div class="form-group">
+                <label>Tanggal</label>
+                <input type="date">
+              </div>
+              <div class="form-group">
+                <label>Deskripsi Aktivitas</label>
+                <textarea placeholder="Masukkan deskripsi aktivitas"></textarea>
+              </div>
+              <button type="button" class="btn-submit">Simpan Aktivitas</button>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
   </div>
 
@@ -822,6 +1394,14 @@
       item.classList.toggle('open');
       btn.classList.toggle('active');
       btn.setAttribute('aria-expanded', item.classList.contains('open') ? 'true' : 'false');
+    }
+
+    // Fungsi untuk toggle form pengisian
+    function toggleForm(formId){
+      const form = document.getElementById(formId);
+      if(form){
+        form.classList.toggle('active');
+      }
     }
 
     document.addEventListener('click', (e) => {
